@@ -10,16 +10,17 @@ import com.example.decorator.Item;
 
 
 public class DecoratorTests {
-    private Flower flower;
-    private BasketDecorator basketDecorator;
-    private PaperDecorator paperDecorator;
-    private RibbonDecorator ribbonDecorator;
 
 
     private static final double FLOWER_PRICE = 10.0;
     private static final double BASKET_PRICE = 4.0;
     private static final double PAPER_PRICE = 13.0;
     private static final double RIBBON_PRICE = 40.0;
+
+    private Flower flower;
+    private BasketDecorator basketDecorator;
+    private PaperDecorator paperDecorator;
+    private RibbonDecorator ribbonDecorator;
 
     @BeforeEach
     public void setUp() {
@@ -77,14 +78,14 @@ public class DecoratorTests {
 
         String description = decoratedFlower.getDescription();
         Assertions.assertEquals(
-            "A beautiful flower in a ribbon wrapper! in a paper wrapper! " +
-            "in a basket wrapper!",
+            "A beautiful flower in a ribbon wrapper! in a paper wrapper! "
+            + "in a basket wrapper!",
             description
         );
 
 
-        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE +
-                               PAPER_PRICE + BASKET_PRICE;
+        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE
+                               + PAPER_PRICE + BASKET_PRICE;
         double actualPrice = decoratedFlower.price();
         Assertions.assertEquals(expectedPrice, actualPrice);
     }
@@ -99,14 +100,14 @@ public class DecoratorTests {
 
         String description = decoratedFlower.getDescription();
         Assertions.assertEquals(
-            "A beautiful flower in a ribbon wrapper! in a paper wrapper! " +
-            "in a basket wrapper!",
+            "A beautiful flower in a ribbon wrapper! in a paper wrapper! "
+            + "in a basket wrapper!",
             description
         );
 
 
-        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE +
-                               PAPER_PRICE + BASKET_PRICE;
+        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE
+                               + PAPER_PRICE + BASKET_PRICE;
         double actualPrice = decoratedFlower.price();
         Assertions.assertEquals(expectedPrice, actualPrice);
     }

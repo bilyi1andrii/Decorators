@@ -20,13 +20,13 @@ public class SmartDocument implements Document {
     @SneakyThrows
     private Properties loadProperties() {
         Properties properties = new Properties();
-        try (InputStream input = getClass()
+        try (InputStream INPUT = getClass()
         .getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
+            if (INPUT == null) {
                 throw new IllegalArgumentException("config.properties"
                 + " file not found in resources");
             }
-            properties.load(input);
+            properties.load(INPUT);
         }
         return properties;
     }

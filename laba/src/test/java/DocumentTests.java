@@ -9,14 +9,15 @@ import com.example.document.CachedDocument;
 import com.example.document.TimedDocument;
 
 public class DocumentTests {
-    private SmartDocument smartDocument;
-    private CachedDocument cachedDocument;
-    private TimedDocument timedDocument;
 
     private static final String TEST_FILE_PATH = "fotos/foto1.png";
     private static final String NON_EXISTENT_FILE_PATH =
         "fotos/non_existent.png";
     private static final String DB_PATH = "cache.db";
+
+    private SmartDocument smartDocument;
+    private CachedDocument cachedDocument;
+    private TimedDocument timedDocument;
 
     @BeforeEach
     public void setUp() {

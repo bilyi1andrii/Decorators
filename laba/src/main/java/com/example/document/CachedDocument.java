@@ -25,14 +25,13 @@ public class CachedDocument implements Document {
 
     @SneakyThrows
     private void initializeDatabase() {
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
-            String createTableQuery = 
-                "CREATE TABLE IF NOT EXISTS cache (" +
-                "file_path TEXT PRIMARY KEY, " +
-                "parsed_text TEXT" +
-                ");";
-            try (Statement stmt = conn.createStatement()) {
-                stmt.execute(createTableQuery);
+        try (Connection CONN = DriverManager.getConnection(
+                "jdbc:sqlite:" + dbPath)) {
+            String createTableQuery = "CREATE TABLE IF NOT EXISTS cache ("
+                                    + "file_path TEXT PRIMARY KEY, "
+                                    + "parsed_text TEXT);";
+            try (Statement STMT = CONN.createStatement()) {
+                STMT.execute(createTableQuery);
             }
         }
     }
@@ -40,12 +39,13 @@ public class CachedDocument implements Document {
     @SneakyThrows
     private String getCachedText(String filePath) {
         String query = "SELECT parsed_text FROM cache WHERE file_path = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, filePath);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getString("parsed_text");
+        try (Connection CONN = DriverManager.getConnection(
+                "jdbc:sqlite:" + dbPath);
+             PreparedStatement PSTMT = CONN.prepareStatement(query)) {
+            PSTMT.setString(1, filePath);
+            ResultSet RS = PSTMT.executeQuery();
+            if (RS.next()) {
+                return RS.getString("parsed_text");
             }
         }
         return null;
@@ -53,24 +53,25 @@ public class CachedDocument implements Document {
 
     @SneakyThrows
     private void cacheText(String filePath, String text) {
-        String insertQuery = 
-            "INSERT OR REPLACE INTO cache (file_path, parsed_text) " +
-            "VALUES (?, ?)";
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
-            pstmt.setString(1, filePath);
-            pstmt.setString(2, text);
-            pstmt.executeUpdate();
+        String insertQuery = "INSERT OR REPLACE INTO cache (file_path, "
+                           + "parsed_text) VALUES (?, ?)";
+        try (Connection CONN = DriverManager.getConnection(
+                "jdbc:sqlite:" + dbPath);
+             PreparedStatement PSTMT = CONN.prepareStatement(insertQuery)) {
+            PSTMT.setString(1, filePath);
+            PSTMT.setString(2, text);
+            PSTMT.executeUpdate();
         }
     }
 
     @SneakyThrows
     public void removeFromCache(String filePath) {
         String deleteQuery = "DELETE FROM cache WHERE file_path = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(deleteQuery)) {
-            pstmt.setString(1, filePath);
-            pstmt.executeUpdate();
+        try (Connection CONN = DriverManager.getConnection(
+                "jdbc:sqlite:" + dbPath);
+             PreparedStatement PSTMT = CONN.prepareStatement(deleteQuery)) {
+            PSTMT.setString(1, filePath);
+            PSTMT.executeUpdate();
             System.out.println("Removed from cache: " + filePath);
         }
     }
@@ -78,9 +79,10 @@ public class CachedDocument implements Document {
     @SneakyThrows
     public void clearCache() {
         String deleteAllQuery = "DELETE FROM cache";
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(deleteAllQuery)) {
-            pstmt.executeUpdate();
+        try (Connection CONN = DriverManager.getConnection(
+                "jdbc:sqlite:" + dbPath);
+             PreparedStatement PSTMT = CONN.prepareStatement(deleteAllQuery)) {
+            PSTMT.executeUpdate();
             System.out.println("All cache cleared");
         }
     }

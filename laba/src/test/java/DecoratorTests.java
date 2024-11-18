@@ -31,7 +31,8 @@ public class DecoratorTests {
     @Test
     public void testBasketDecorator() {
         String description = basketDecorator.getDescription();
-        Assertions.assertEquals("A beautiful flower in a basket wrapper!", description);
+        Assertions.assertEquals("A beautiful flower"
+        + " in a basket wrapper!", description);
 
         double price = basketDecorator.price();
         Assertions.assertEquals(FLOWER_PRICE + BASKET_PRICE, price);
@@ -40,7 +41,8 @@ public class DecoratorTests {
     @Test
     public void testPaperDecorator() {
         String description = paperDecorator.getDescription();
-        Assertions.assertEquals("A beautiful flower in a paper wrapper!", description);
+        Assertions.assertEquals("A beautiful flower"
+        + " in a paper wrapper!", description);
 
         double price = paperDecorator.price();
         Assertions.assertEquals(FLOWER_PRICE + PAPER_PRICE, price);
@@ -49,7 +51,8 @@ public class DecoratorTests {
     @Test
     public void testRibbonDecorator() {
         String description = ribbonDecorator.getDescription();
-        Assertions.assertEquals("A beautiful flower in a ribbon wrapper!", description);
+        Assertions.assertEquals("A beautiful flower"
+        + " in a ribbon wrapper!", description);
 
         double price = ribbonDecorator.price();
         Assertions.assertEquals(FLOWER_PRICE + RIBBON_PRICE, price);
@@ -72,9 +75,11 @@ public class DecoratorTests {
                               );
         String expectedDescription = "A beautiful flower in a ribbon wrapper! "
                                    + "in a paper wrapper! in a basket wrapper!";
-        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE + PAPER_PRICE + BASKET_PRICE;
+        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE
+        + PAPER_PRICE + BASKET_PRICE;
 
-        testDecoratedFlower(decoratedFlower, expectedDescription, expectedPrice);
+        testDecoratedFlower(decoratedFlower,
+        expectedDescription, expectedPrice);
     }
 
     @Test
@@ -85,8 +90,10 @@ public class DecoratorTests {
 
         String expectedDescription = "A beautiful flower in a ribbon wrapper! "
                                    + "in a paper wrapper! in a basket wrapper!";
-        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE + PAPER_PRICE + BASKET_PRICE;
+        double expectedPrice = FLOWER_PRICE + RIBBON_PRICE
+        + PAPER_PRICE + BASKET_PRICE;
 
-        testDecoratedFlower(decoratedFlower, expectedDescription, expectedPrice);
+        testDecoratedFlower(decoratedFlower,
+        expectedDescription, expectedPrice);
     }
 }

@@ -43,9 +43,9 @@ public class CachedDocument implements Document {
                 "jdbc:sqlite:" + dbPath);
              PreparedStatement PSTMT = CONN.prepareStatement(query)) {
             PSTMT.setString(1, filePath);
-            ResultSet RS = PSTMT.executeQuery();
-            if (RS.next()) {
-                return RS.getString("parsed_text");
+            ResultSet rs = PSTMT.executeQuery();
+            if (rs.next()) {
+                return rs.getString("parsed_text");
             }
         }
         return null;
